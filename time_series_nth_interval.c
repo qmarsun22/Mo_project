@@ -50,20 +50,17 @@ struct DPhour {
 };
 
 struct DPDay {
-    struct hour *hour;
+    struct DPhour *hour;
 };
 
 
 int allocate_memory_data_points(struct DPDay *dpday);
 int allocate_memory_data_points(struct DPDay *dpday) {
-    dpday = malloc(sizeof(struct DPDay)* MAX_DAY);
-    for (int dayindx=0; dayindx < MAX_DAY; dayindx++) {
-        dpday[dayindx] = (struct *DPhour) malloc(sizeof(struct DPhour) * MAX_HOUR);
-        for(int  hrindx=0 ; hrindx < MAX_HOUR; hrindx++) {
-            dpday[dayindx][hrindx] = (struct DPminute) malloc(size( struct DPminute) * MAX_MINUTE)
-            for(int minuteidx=0; minuteidx < MAX_MINUTE ; minuteidx++) {
-                 dpday[dayindx][hrindx][minuteidx] = rand();
-            }
+    dpday->hour = malloc(sizeof(struct DPhour)* MAX_HOUR);
+    for(int hrindex=0; hrindex < MAX_HOUR; hrindex++ ){
+        dpday->hour[hrindex].min =  malloc(sizeof(struct DPminute)* MAX_MINUTE);
+        for(int minindx = 0 ; minindx < MAX_MINUTE; minindx++) {
+             dpday->hour[hrindex]->min[minindx]->value =  rand();
         }
     }
     return 0;
