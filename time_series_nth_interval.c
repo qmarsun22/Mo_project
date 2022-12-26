@@ -41,7 +41,7 @@ Alternative time units
 #define MAX_MONTH 12
 #define MAX_NUMBER_OF_YEARS 25
 
- struct DPminute {
+struct DPminute {
     int val;
 } ;
 
@@ -65,14 +65,14 @@ int allocate_memory_data_points(struct *DPDay) {
 */
 
 
-int print_nth_minute(struct minute *min, int nth);
+int print_nth_minute(struct DPminute *min, int nth);
 
 
-int print_nth_minute(struct minute *min, int nth)
+int print_nth_minute(struct DPminute *min, int nth)
 {
     printf("\n time_series nth value where n=%d", nth);
     for(int i=0; i < MAX_MINUTE ; i=i+nth) {
-         printf("\n value min %d, %d", i, min[i].val);
+        printf("\n value min %d, %d", i, min[i].val);
     }
     return 0;
 }
@@ -82,7 +82,7 @@ int main()
     //struct hour hour_val[24];
   
     // staring with minute first
-    struct minute minute_val[MAX_MINUTE];
+    struct DPminute minute_val[MAX_MINUTE];
     
     for(int i=0;i < MAX_MINUTE; i++) {
         minute_val[i].val = rand();
