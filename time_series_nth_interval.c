@@ -53,16 +53,22 @@ struct DPDay {
     struct hour *hour;
 };
 
-/*
-int allocate_memory_data_points(struct *DPDay);
-int allocate_memory_data_points(struct *DPDay) {
-    DPDay = malloc(sizeof(DPDay)* MAX_DAY);
-    for (int dayindx=0; i < MAX_DAY; i++) {
-        DPDay[dayindx] = malloc(sizeof(DPhour) * MAX_HOUR);
-        for(int j=0; j < )
+
+int allocate_memory_data_points(struct DPDay *dpday);
+int allocate_memory_data_points(struct DPDay *dpday) {
+    dpday = malloc(sizeof(struct DPDay)* MAX_DAY);
+    for (int dayindx=0; dayindx < MAX_DAY; dayindx++) {
+        dpday[dayindx] = (struct *DPhour) malloc(sizeof(struct DPhour) * MAX_HOUR);
+        for(int  hrindx=0 ; hrindx < MAX_HOUR; hrindx++) {
+            dpday[dayindx][hrindx] = (struct DPminute) malloc(size( struct DPminute) * MAX_MINUTE)
+            for(int minuteidx=0; minuteidx < MAX_MINUTE ; minuteidx++) {
+                 dpday[dayindx][hrindx][minuteidx] = rand();
+            }
+        }
     }
+    return 0;
 }
-*/
+
 
 
 int print_nth_minute(struct DPminute *min, int nth);
