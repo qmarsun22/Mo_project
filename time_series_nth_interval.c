@@ -39,41 +39,19 @@ Alternative time units
 #define MAX_HOUR 24
 #define MAX_DAY 31  
 #define MAX_MONTH 12
-#define MAX_NUMBER_OF_YEARS 23 
-//( 2000 - 20023)
+#define MAX_NUMBER_OF_YEARS 25 
+// year 0 to 24 ( 2000 to 2024)
+// month 0 to 11 
+// day  0 to 30
+// hour 0 to 23 
+// min 0 to 59
+//
 
-struct DPminute {
-    int val;
-} ;
-
-struct DPhour {
-     struct DPminute *min;
-};
-
-struct DPDay {
-    struct DPhour *hour;
-};
-
-int allcate_perminute(struct DPhour *dphour ) {
-    dphour = malloc(sizeof(struct DPminute) * 50);
-}
-
-/*
-int allocate_memory_data_points(struct DPDay *dpday);
-int allocate_memory_data_points(struct DPDay *dpday) {
-    dpday->hour = malloc(sizeof(struct DPhour)* MAX_HOUR);
-    for(int hrindex=0; hrindex < MAX_HOUR; hrindex++ ){
-        dpday->hour[hrindex].min =  malloc(sizeof(struct DPminute)* MAX_MINUTE);
-        for(int minindx = 0 ; minindx < MAX_MINUTE; minindx++) {
-             dpday->hour[hrindex]->min[minindx]->value =  rand();
-        }
-    }
-    return 0;
-}*/
 
 
 
 
+/*
 int print_nth_minute(struct DPminute *min, int nth);
 
 
@@ -85,15 +63,62 @@ int print_nth_minute(struct DPminute *min, int nth)
     }
     return 0;
 }
+*/
 
-int try2();
-int try2() {
-    struct DPminute *minute;
-    minute = malloc( sizeof( struct DPminute) * 60);
-    for(int i=0; i<= 60; i++) {
-       /* *((minute+i))->val = 10; */
+
+int store_random_value(int *datapts);
+int store_random_value(int *datapts) {
+    for(int y=0; y < MAX_NUMBER_OF_YEARS; y++) {
+        for(int m=0; m < MAX_MONTH; m++ ) {
+            for(int k=0; k < MAX_DAY; k++) {
+                for(int i=0; i < MAX_HOUR; i++) {
+                    for(int j=0; j < MAX_MINUTE; j++ ) {
+                        int index = y+MAX_MONTH+m+MAX_DAY+k+MAX_HOUR+ i+MAX_MINUTE+ j;
+                        *(datapts +index) = rand();
+                    } 
+                }
+            }
+        }
     }
 }
+
+int print_values(int *datapts) {
+  for(int y=0; y<=MAX_NUMBER_OF_YEARS; y++) {
+        for(int m=0; m<MAX_MONTH; m++ ) {
+            for(int k=0; k <MAX_DAY; k++) {
+                for(int i=0; i<MAX_HOUR; i++) {
+                    for(int j=0; j <MAX_MINUTE; j++ ) {
+                        int val =  *(datapts +y+MAX_MONTH+m+MAX_DAY+k+MAX_HOUR+ i+MAX_MINUTE+ j);
+                        printf("\n value yr=%d mnt=%d, day=%d, hr=%d, min=%d, %d",y,m,k, i,j, val);
+                        
+                    }
+                }
+            }
+        }
+    }  
+}
+
+//  int year, int month, int day,int hour, int nthminute;
+int print_nthvalues(int *datapts,int year, int month, int day,int hour, int nthminute) {
+    int y = year;
+    int m = month;
+    int d = day;
+    int h = hour;
+    int nthminute = nthminute;
+  for(int y=0; y<=MAX_NUMBER_OF_YEARS; y++) {
+        for(int m=0; m<MAX_MONTH; m++ ) {
+            for(int k=0; k <MAX_DAY; k++) {
+                for(int i=0; i<MAX_HOUR; i++) {
+                    for(int j=0; j <MAX_MINUTE; j++ ) {
+                        int val =  *(datapts +y+MAX_MONTH+m+MAX_DAY+d+MAX_HOUR+ h+MAX_MINUTE+ j);
+                        printf("\n value yr=%d mnt=%d, day=%d, hr=%d, min=%d, %d",y,m,k, i,j, val);
+                    }
+                }
+            }
+        }
+    }  
+}
+
 
 int try3() {
     int *dp_hr_min;
@@ -111,9 +136,7 @@ int try3() {
             }
         }
     }
-    //for(int y=0; y<=MAX_NUMBER_OF_YEARS; y++) 
-    int y=10;
-    {
+    for(int y=0; y<=MAX_NUMBER_OF_YEARS; y++) {
         for(int m=0; m<MAX_MONTH; m++ ) {
             for(int k=0; k <MAX_DAY; k++) {
                 for(int i=0; i<MAX_HOUR; i++) {
@@ -132,7 +155,25 @@ int main()
 {
     //struct hour hour_val[24];
   // try2();
-  try3();
+  int *datapts;
+  datapts = malloc(MAX_NUMBER_OF_YEARS*MAX_MONTH* MAX_DAY*MAX_HOUR *MAX_MINUTE*sizeof(int));
+  store_random_value(datapts);
+  // print_values(datapts);
+  int year,month,day,hour,nthminute;
+  printf("\n enter year 0 to 25 :");
+  scanf("%d",&year);
+  printf("\n enter month 0 to 11 :");
+  scanf("%d",&month);
+  printf("\n enter day 0 to 31 :");
+  scanf("%d",&day);
+  printf("\n enter hour 0 to 23 :");
+  scanf("%d",&hour);
+  printf("\n enter nthminute (5,15,30,60):");
+  scanf("%d",&nthminute);
+  printf("\n input values year=%d, month=%d,day=%d,hour=%d,nthminute=%d"
+        ,year,month,day,hour,nthminute);
+
+
   
   /*
     // staring with minute first
